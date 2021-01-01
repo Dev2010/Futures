@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\Utils\Utils.csproj", "{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMEGroupPositionLimitFileParser", "CMEGroupPositionLimitFileParser.csproj", "{54593656-D981-4A6C-8660-4DF346DCD20B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54593656-D981-4A6C-8660-4DF346DCD20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54593656-D981-4A6C-8660-4DF346DCD20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54593656-D981-4A6C-8660-4DF346DCD20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54593656-D981-4A6C-8660-4DF346DCD20B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F02998CF-9F84-4CC5-B64F-D467B061BC5F}
+	EndGlobalSection
+EndGlobal
