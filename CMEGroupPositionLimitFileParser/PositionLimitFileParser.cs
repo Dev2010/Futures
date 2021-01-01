@@ -47,17 +47,16 @@ namespace CMEGroupPositionLimitFileParser
             foreach (string file in files)
             {
                 string fullyQualifiedFileName = Path.Combine(folder, file);
-                Logger.Info(fullyQualifiedFileName);
-
-                
-                Excel.Workbook xlBook = excel.Workbooks.Open(fullyQualifiedFileName);
-
-                //Excel.Worksheet xlSheet = (Excel.Worksheet)xlBook.Worksheets["Sheet1"];
-                Excel.Worksheet xlSheet = (Excel.Worksheet)xlBook.Worksheets[1];
-                xlSheet.Select(Type.Missing);
                 string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
                 string csvFileName = String.Format($"{fileNameWithoutExtension}.csv");
                 string fullyQualifiedCsvFileName = Path.Combine(folder, csvFileName);
+
+                Logger.Info($"{fullyQualifiedFileName} to {fullyQualifiedCsvFileName}");
+                
+                Excel.Workbook xlBook = excel.Workbooks.Open(fullyQualifiedFileName);
+                //Excel.Worksheet xlSheet = (Excel.Worksheet)xlBook.Worksheets["Sheet1"];
+                Excel.Worksheet xlSheet = (Excel.Worksheet)xlBook.Worksheets[1];
+                xlSheet.Select(Type.Missing);
                 xlBook.SaveAs(fullyQualifiedCsvFileName, Excel.XlFileFormat.xlCSV, Excel.XlSaveAsAccessMode.xlNoChange);
                 xlBook.Close(SaveChanges:false);
                 
