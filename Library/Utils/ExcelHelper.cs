@@ -80,6 +80,7 @@ namespace Utils
 
                 SortedDictionary<int, string>  dtColumns = GetHeadersFromExcelSheetData(headerMarker, usedRange, data);
 
+                xlBook.Close(false);
             }
             catch (Exception exception)
             {
@@ -87,6 +88,7 @@ namespace Utils
             }
             finally
             {
+                
                 excel.Quit();
             }
         }

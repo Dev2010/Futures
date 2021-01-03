@@ -55,6 +55,7 @@
     <Compile Include="ExcelHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\position-limits-cme-empty-cols.xlsx" />
     <None Include="data\position-limits-cme.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
