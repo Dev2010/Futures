@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMEGroupPositionLimitFileParser", "CMEGroupPositionLimitFileParser.csproj", "{54593656-D981-4A6C-8660-4DF346DCD20B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMEGroupPositionLimitFileParser", "..\Application\CMEGroupPositionLimitFileParser\CMEGroupPositionLimitFileParser.csproj", "{54593656-D981-4A6C-8660-4DF346DCD20B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E4280C9E-1EFF-4CB5-A1FC-054BCEBDC9D7}"
 EndProject
@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{2E45
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{EE92FDC1-142E-4EDC-8371-D569A59CE584}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\..\Library\Utils\Utils.csproj", "{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\Library\Utils\Utils.csproj", "{6F9FC0A3-EFC0-45BA-8F67-51383D0EC8EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsTest", "..\..\Test\UtilsTest\UtilsTest.csproj", "{0F1E4CE6-30CC-4AFD-86DF-E48F6544F730}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsTest", "..\Test\UtilsTest\UtilsTest.csproj", "{0F1E4CE6-30CC-4AFD-86DF-E48F6544F730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
