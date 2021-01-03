@@ -8,5 +8,11 @@
     <Setting Name="CMEPositionLimitFilePattern" Type="System.String" Scope="Application">
       <Value Profile="(Default)">position-limits-cme</Value>
     </Setting>
+    <Setting Name="CMEPositionLimitFileHeaderMarker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Contract Name</Value>
+    </Setting>
+    <Setting Name="CMEPositionLimitFileFooterMarker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Last updated</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

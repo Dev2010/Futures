@@ -40,5 +40,23 @@ namespace CMEGroupPositionLimitFileParser {
                 return ((string)(this["CMEPositionLimitFilePattern"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Contract Name")]
+        public string CMEPositionLimitFileHeaderMarker {
+            get {
+                return ((string)(this["CMEPositionLimitFileHeaderMarker"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Last updated")]
+        public string CMEPositionLimitFileFooterMarker {
+            get {
+                return ((string)(this["CMEPositionLimitFileFooterMarker"]));
+            }
+        }
     }
 }
