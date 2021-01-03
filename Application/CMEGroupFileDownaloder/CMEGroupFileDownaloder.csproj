@@ -65,7 +65,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\Library\Utils\Utils.csproj">
       <Project>{6f9fc0a3-efc0-45ba-8f67-51383d0ec8ec}</Project>
       <Name>Utils</Name>
     </ProjectReference>
