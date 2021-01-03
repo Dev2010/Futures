@@ -13,7 +13,7 @@ namespace Utils
         {
             this.valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
         }
-        public bool Equals(Dictionary<TKey, TValue> x, Dictionary<TKey, TValue> y)
+        public bool Equals(IDictionary<TKey, TValue> x, IDictionary<TKey, TValue> y)
         {
             if (x.Count != y.Count)
                 return false;

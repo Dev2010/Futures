@@ -91,7 +91,7 @@ namespace Utils
             }
         }
 
-        private static SortedDictionary<int, string> GetHeadersFromExcelSheetData(string headerMarker, Range usedRange, object[,] data)
+        public static SortedDictionary<int, string> GetHeadersFromExcelSheetData(string headerMarker, Range usedRange, object[,] data)
         {
             bool headerRowFound = false;
             int headerColumnCount = 0;
