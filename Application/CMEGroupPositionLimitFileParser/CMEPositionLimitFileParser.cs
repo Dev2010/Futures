@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -14,6 +15,8 @@ namespace CMEGroupPositionLimitFileParser
         public string Folder { get; }
         public string FileName { get; }
         public string FullyQualifiedFileName { get; }
+
+        Dictionary<string, string> CMEHeaderValueToColumns = new Dictionary<string, string>();
         public CMEPositionLimitFileParser(string folder, string fileName)
         {
             Folder = folder;
@@ -21,8 +24,15 @@ namespace CMEGroupPositionLimitFileParser
             FullyQualifiedFileName = Path.Combine(folder, fileName);
         }
 
+        private void Init()
+        {
+            var text = File.ReadAllText(Config.Default.CMEHeaderMapFile);
+            CMEHeaderValueToColumns = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
+        }
         public DataSet Read()
         {
+            Init();
+
             DataSet ds = null;
 
             if (! File.Exists(FullyQualifiedFileName))
@@ -30,7 +40,7 @@ namespace CMEGroupPositionLimitFileParser
                 throw new FileNotFoundException();
             }
 
-            ExcelHelper.GetDataSetFromExcelSheet(FullyQualifiedFileName, 1, Config.Default.CMEPositionLimitFileHeaderMarker, Config.Default.CMEPositionLimitFileFooterMarker);
+            ExcelHelper.GetDataSetFromExcelSheet(FullyQualifiedFileName, 1, Config.Default.CMEPositionLimitFileHeaderMarker, Config.Default.CMEPositionLimitFileFooterMarker, CMEHeaderValueToColumns);
 
             return null;
         }

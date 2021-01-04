@@ -22,6 +22,7 @@ namespace Utils
     public static class ExcelHelper
     {
         private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public static void ConvertExcelSheetToCsv(string folder, IEnumerable<string> files)
         {
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), folder, files.Count()));
@@ -59,7 +60,7 @@ namespace Utils
             }
         }
 
-        public static void GetDataSetFromExcelSheet(string fileName, int index, string headerMarker, string footerMarker)
+        public static void GetDataSetFromExcelSheet(string fileName, int index, string headerMarker, string footerMarker, Dictionary<string, string> columnSchema)
         {
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), index));
 
@@ -78,7 +79,69 @@ namespace Utils
                 Range usedRange = xlSheet.UsedRange;
                 object[,] data = usedRange.Value2;
 
-                SortedDictionary<int, string>  dtColumns = GetHeadersFromExcelSheetData(headerMarker, usedRange, data);
+                int startOfDataIndex;
+                Dictionary<int, string> dtColumns = GetHeadersFromExcelSheetData(headerMarker, usedRange, data, out startOfDataIndex);
+                Dictionary<int, string> dtDBColumns = MapColumnToSchema(columnSchema, dtColumns);
+                bool footerFound = false;
+
+                DataTable dtData = GetDataTableSchema(dtDBColumns.Values.ToArray());
+                #region parse
+                int rowCount = 0;
+                for (int rowOffset = startOfDataIndex; rowOffset <= usedRange.Rows.Count; rowOffset++)
+                {
+                    if(footerFound) { break; }
+                    bool newRow = false;
+                    foreach (int colIndex in dtDBColumns.Keys)
+                    {
+                        string cellValue = String.Empty;
+                        try
+                        {
+                            cellValue = Convert.ToString(data[rowOffset, colIndex]);
+
+                        }
+                        catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException exception)
+                        {
+                            Logger.Error($"Row {rowOffset} - Column {colIndex}", exception);
+                            //ConvertVal = (double)(data[rowCount, columnCount]);
+                            //cellValue = ConvertVal.ToString();
+                        }
+
+                        string columnName = dtDBColumns[colIndex];
+                        string columnValue = string.Empty;
+                        if (cellValue.StartsWith(footerMarker, true, CultureInfo.InvariantCulture))
+                        {
+                            Logger.Info($"Footer marker found {footerMarker}, ending read");
+                            footerFound = true;
+                            break;
+                        }
+                        else 
+                        { 
+                            if (!string.IsNullOrWhiteSpace(cellValue))
+                            {
+                                cellValue = Regex.Replace(cellValue, @"\p{C}+", string.Empty);
+                                if (!string.IsNullOrWhiteSpace(cellValue))
+                                {
+                                    columnValue = cellValue;
+                                }
+                            }
+                        }
+                        DataRow Row;
+                        if (! newRow)
+                        {
+                            newRow = true;
+                            Row = dtData.NewRow();
+                            Row[columnName] = columnValue;
+                            dtData.Rows.Add(Row);
+                        }
+                        else
+                        {
+                            Row = dtData.Rows[rowCount];
+                            Row[columnName] = columnValue;
+                        }
+                        rowCount++;
+                    }
+                }
+                #endregion
 
                 xlBook.Close(false);
             }
@@ -93,12 +156,48 @@ namespace Utils
             }
         }
 
-        public static SortedDictionary<int, string> GetHeadersFromExcelSheetData(string headerMarker, Range usedRange, object[,] data)
+        private static DataTable GetDataTableSchema(string[] columns)
+        {
+            DataTable dt = new DataTable();
+            foreach (string columnName in columns)
+            {
+                DataColumn Column = new DataColumn();
+                Column.DataType = System.Type.GetType("System.String");
+                Column.ColumnName = columnName;
+                dt.Columns.Add(Column);
+            }
+            return dt;
+        }
+
+        private static Dictionary<int, string> MapColumnToSchema(Dictionary<string, string> columnDefinition, Dictionary<int, string> dtColumns)
+        {
+            Dictionary<int, string> dtDBColumns = new Dictionary<int, string>();
+
+            List<string> parsedColumns = new List<string>(dtColumns.Values);
+            List<string> definedColumns = new List<string>(columnDefinition.Values);
+            IEnumerable<string> nonintersect = parsedColumns.Except(definedColumns).Union(definedColumns.Except(parsedColumns));
+
+            if (nonintersect.Count() > 0)
+            {
+                throw new ColumnMismatchException("File columns do not match column definition");
+            }
+
+            foreach (KeyValuePair<int, string> keyValuePair in dtColumns)
+            {
+                string dbColumnName = columnDefinition[keyValuePair.Value];
+                int excelColumnIndex = keyValuePair.Key;
+                dtDBColumns.Add(excelColumnIndex, dbColumnName);
+            }
+
+            return dtDBColumns;
+        }
+
+        public static Dictionary<int, string> GetHeadersFromExcelSheetData(string headerMarker, Range usedRange, object[,] data, out int startOfDataIndex )
         {
             bool headerRowFound = false;
             int headerColumnCount = 0;
-
-            SortedDictionary<int, string> dtColumns = new SortedDictionary<int, string>();
+            startOfDataIndex = 0;
+            Dictionary<int, string> dtColumns = new Dictionary<int, string>();
             //var Column = new DataColumn();
             //Column.DataType = System.Type.GetType("System.String");
             //Column.ColumnName = count.ToString();
@@ -123,7 +222,7 @@ namespace Utils
                     }
                     catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException exception)
                     {
-                        Logger.Error(exception);
+                        Logger.Error($"Row {rowCount} - Column {columnCount}", exception);
                         //ConvertVal = (double)(data[rowCount, columnCount]);
                         //cellValue = ConvertVal.ToString();
                     }
@@ -137,6 +236,7 @@ namespace Utils
                             {
                                 dtColumns.Add(headerColumnCount, cellValue);
                                 headerRowFound = true;
+                                startOfDataIndex = rowCount;
                                 Logger.Info(cellValue);
                             }
                         }

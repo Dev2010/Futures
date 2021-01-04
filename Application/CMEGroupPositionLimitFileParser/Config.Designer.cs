@@ -58,5 +58,15 @@ namespace CMEGroupPositionLimitFileParser {
                 return ((string)(this["CMEPositionLimitFileFooterMarker"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GitHub\\Futures\\Application\\CMEGroupPositionLimitFileParser\\data\\cme_position_l" +
+            "imit_header.json")]
+        public string CMEHeaderMapFile {
+            get {
+                return ((string)(this["CMEHeaderMapFile"]));
+            }
+        }
     }
 }

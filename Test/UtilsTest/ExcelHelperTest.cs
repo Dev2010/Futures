@@ -24,10 +24,10 @@ namespace UtilsTest
             Range usedRange = xlSheet.UsedRange;
             object[,] data = usedRange.Value2;
 
+            int startOfDataIndex;
+            Dictionary<int, string> dtColumns = ExcelHelper.GetHeadersFromExcelSheetData("Contract Name", usedRange, data, out startOfDataIndex);
 
-            SortedDictionary<int, string> dtColumns = ExcelHelper.GetHeadersFromExcelSheetData("Contract Name", usedRange, data);
-
-            SortedDictionary<int, string> dtExpectedColumns = new SortedDictionary<int, string>();
+            Dictionary<int, string> dtExpectedColumns = new Dictionary<int, string>();
             dtExpectedColumns.Add(0, @"Contract Name");
             dtExpectedColumns.Add(1, @"Rule Chapter");
             dtExpectedColumns.Add(2, @"Commodity Code");
@@ -83,10 +83,10 @@ namespace UtilsTest
             Range usedRange = xlSheet.UsedRange;
             object[,] data = usedRange.Value2;
 
+            int startOfDataIndex;
+            Dictionary<int, string> dtColumns = ExcelHelper.GetHeadersFromExcelSheetData("Contract Name", usedRange, data, out startOfDataIndex);
 
-            SortedDictionary<int, string> dtColumns = ExcelHelper.GetHeadersFromExcelSheetData("Contract Name", usedRange, data);
-
-            SortedDictionary<int, string> dtExpectedColumns = new SortedDictionary<int, string>();
+            Dictionary<int, string> dtExpectedColumns = new Dictionary<int, string>();
             dtExpectedColumns.Add(0, @"Contract Name");
             dtExpectedColumns.Add(1, @"Rule Chapter");
             dtExpectedColumns.Add(2, @"Commodity Code");
