@@ -127,5 +127,11 @@ namespace UtilsTest
 
             Assert.IsTrue((new DictionaryEquality<int, string>()).Equals(dtColumns, dtExpectedColumns));
         }
+
+        [TestMethod]
+        public void GetDataSetFromExcelSheetTest()
+        {
+
+        }
     }
 }
