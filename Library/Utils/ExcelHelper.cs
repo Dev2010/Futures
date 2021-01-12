@@ -64,7 +64,7 @@ namespace Utils
         {
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), index));
 
-            DataTable dataTable = new DataTable();
+            DataTable dataTable = null;
 
             Excel.Application excel = new Excel.Application();
             excel.DisplayAlerts = false;
@@ -84,15 +84,17 @@ namespace Utils
                 Dictionary<int, string> dtDBColumns = MapColumnToSchema(columnSchema, dtColumns);
                 bool footerFound = false;
 
-                DataTable dtData = GetDataTableSchema(dtDBColumns.Values.ToArray());
+                dataTable = GetDataTableSchema(dtDBColumns.Values.ToArray());
                 #region parse
                 int rowCount = 0;
                 for (int rowOffset = startOfDataIndex; rowOffset <= usedRange.Rows.Count; rowOffset++)
                 {
-                    if(footerFound) { break; }
-                    bool newRow = false;
-                    foreach (int colIndex in dtDBColumns.Keys)
+                    Dictionary<string, string> dtRowData = new Dictionary<string, string>();
+                    if (footerFound) { break; }
+                    foreach (int keyIndex in dtDBColumns.Keys)
                     {
+                        int colIndex = keyIndex + 1; //excel is not 0 based
+
                         string cellValue = String.Empty;
                         try
                         {
@@ -106,7 +108,7 @@ namespace Utils
                             //cellValue = ConvertVal.ToString();
                         }
 
-                        string columnName = dtDBColumns[colIndex];
+                        string columnName = dtDBColumns[keyIndex];
                         string columnValue = string.Empty;
                         if (cellValue.StartsWith(footerMarker, true, CultureInfo.InvariantCulture))
                         {
@@ -114,8 +116,8 @@ namespace Utils
                             footerFound = true;
                             break;
                         }
-                        else 
-                        { 
+                        else
+                        {
                             if (!string.IsNullOrWhiteSpace(cellValue))
                             {
                                 cellValue = Regex.Replace(cellValue, @"\p{C}+", string.Empty);
@@ -125,19 +127,11 @@ namespace Utils
                                 }
                             }
                         }
-                        DataRow Row;
-                        if (! newRow)
-                        {
-                            newRow = true;
-                            Row = dtData.NewRow();
-                            Row[columnName] = columnValue;
-                            dtData.Rows.Add(Row);
-                        }
-                        else
-                        {
-                            Row = dtData.Rows[rowCount];
-                            Row[columnName] = columnValue;
-                        }
+                        dtRowData.Add(columnName, columnValue);
+                    }
+                    if (!footerFound)
+                    {
+                        DataHelper.AddDictonaryToDataTable(dataTable, dtRowData);
                         rowCount++;
                     }
                 }
@@ -175,7 +169,7 @@ namespace Utils
             Dictionary<int, string> dtDBColumns = new Dictionary<int, string>();
 
             List<string> parsedColumns = new List<string>(dtColumns.Values);
-            List<string> definedColumns = new List<string>(columnDefinition.Values);
+            List<string> definedColumns = new List<string>(columnDefinition.Keys);
             IEnumerable<string> nonintersect = parsedColumns.Except(definedColumns).Union(definedColumns.Except(parsedColumns));
 
             if (nonintersect.Count() > 0)
@@ -233,7 +227,7 @@ namespace Utils
                             {
                                 dtColumns.Add(headerColumnCount, cellValue);
                                 headerRowFound = true;
-                                startOfDataIndex = rowCount;
+                                startOfDataIndex = rowCount + 1; // data starts from next row. this is a header row.
                                 Logger.Info(cellValue);
                             }
                         }

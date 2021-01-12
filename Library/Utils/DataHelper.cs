@@ -14,12 +14,7 @@ namespace Utils
     {
         public static bool Equals(DataTable dt1, DataTable dt2)
         {
-            if (dt1.Columns.Count != dt2.Columns.Count)
-            {
-                return false;
-            }
-
-            if (dt1.Rows.Count != dt2.Rows.Count)
+            if ((dt1.Columns.Count != dt2.Columns.Count) || (dt1.Rows.Count != dt2.Rows.Count))
             {
                 return false;
             }
@@ -38,11 +33,6 @@ namespace Utils
                 return false;
             }
 
-            if (dt1.Rows.Count != dt2.Rows.Count)
-            {
-                return false;
-            }
-
             for (int rowCount = 0; rowCount < dt1.Rows.Count; rowCount++)
             {
                 foreach (string columnName in columnNames1)
@@ -54,12 +44,17 @@ namespace Utils
                         s1 = string.Empty;
                     }
 
+                    s1 = s1.Trim();
+
                     int c2 = dt2.Columns[columnName].Ordinal;
                     string s2 = dt2.Rows[rowCount][c2].ToString();
                     if (string.IsNullOrWhiteSpace(s2))
                     {
                         s2 = string.Empty;
                     }
+
+                    s2 = s2.Trim();
+
                     Console.WriteLine($"{s1} / {s2}");
                     if (s1 != s2)
                     {
@@ -69,6 +64,31 @@ namespace Utils
             }
 
             return true;
+        }
+        public static void AddDictonaryToDataTable(DataTable dataTable, Dictionary<string, string> dtRowData)
+        {
+            // check if all values are empty
+            bool empty = true;
+            foreach (KeyValuePair<string, string> keyValuePair in dtRowData)
+            {
+                if (! string.IsNullOrWhiteSpace(keyValuePair.Value))
+                {
+                    empty = false;
+                }
+            }
+
+            if (empty)
+            {
+                // nothing to add
+                return;
+            }
+
+            DataRow Row = dataTable.NewRow();
+            foreach (KeyValuePair<string, string> keyValuePair in dtRowData)
+            {
+                Row[keyValuePair.Key] = keyValuePair.Value;
+            }
+            dataTable.Rows.Add(Row);
         }
     }
 }
