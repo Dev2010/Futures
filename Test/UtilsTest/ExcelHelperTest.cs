@@ -4,6 +4,10 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
+using DataTable = System.Data.DataTable;
+using DataColumn = System.Data.DataColumn;
+using DataRow = System.Data.DataRow;
 
 namespace UtilsTest
 {
@@ -131,7 +135,44 @@ namespace UtilsTest
         [TestMethod]
         public void GetDataSetFromExcelSheetTest()
         {
+            Excel.Application excel = new Excel.Application();
+            excel.DisplayAlerts = false;
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
+            string dataDir = Path.Combine(projectDirectory, "data");
+            string positionLimitCMEFilePath = Path.Combine(dataDir, "cme-dataset.xlsx");
+            Workbook xlBook = excel.Workbooks.Open(positionLimitCMEFilePath);
+            Worksheet xlSheet = (Worksheet)xlBook.Worksheets[1];
+            Range usedRange = xlSheet.UsedRange;
+            object[,] data = usedRange.Value2;
+
+            string cmeColumnsSchemaFileName = Path.Combine(dataDir, "cme_dataset_schema_test.json");
+            var text = File.ReadAllText(cmeColumnsSchemaFileName);
+            Dictionary<string, string> columnSchema = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
+
+            DataTable resultTable = ExcelHelper.GetDataSetFromExcelSheet(positionLimitCMEFilePath, 1, "Contract Name", "Last updated", columnSchema);
+
+            DataTable expectedResultTable = new DataTable();
+            expectedResultTable.Columns.Add(new DataColumn("contract_name", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("commodity_code", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("contract_size", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("contract_units", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("diminishing_balance_contract", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("reporting_level", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("spot_month_position_comprised_of_futures_and_deliveries", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("initial_spot_month_limit_in_net_futures_equivalents_leg_1_over_leg_2", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("initial_spot_month_limit_effective_date", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("subsequent_spot_month_limits_effective_dates", System.Type.GetType("System.String")));
+            expectedResultTable.Columns.Add(new DataColumn("all_month_limit_in_net_futures_equivalents_leg_1_over_leg_2", System.Type.GetType("System.String")));
+
+            expectedResultTable.Rows.Add("Live Cattle Futures", "48", "40,000", "Pounds", "", "25", "600", "Close of trading on the first business day following the first Friday of the contract month", "300 at the close of trading on the business day prior to the last 5 trading days of the contract month; 200 at the close of trading on the business day prior to the last 2 trading days of the contract month", "");
+            expectedResultTable.Rows.Add("USD Malaysian Crude Palm Oil Calendar Futures(Up to and Including the December 2021 Contract)", "CPO", "25", "Metric Tons", "Y", "25", "3,000", "Close of trading on the business day prior to the first trading day of the contract month", "", "3,000");
+            expectedResultTable.Rows.Add("Bursa Malaysia Crude Palm Oil – Gasoil Spread Futures(Commencing with the January 2022 Contract and Beyond)", "POG", "25", "Metric Tons", "Y", "25", "3,000/1,500", "For CPO: Close of trading on the business day prior to the first trading day of the contract month and for GX: Close of trading 3 business days prior to last trading day of the contract", "", "");
+            expectedResultTable.Rows.Add("S & P GSCI ER Index Swaps(Cleared OTC)", "SES", "100", "Dollar * S&P GSCI ER Index", "", "1", "", "", "", "");
+            expectedResultTable.Rows.Add("CME European HDD Index Futures LONDON", "D0", "20", "Pound Sterling * respective CME European HDD Index", "", "25", "", "", "", "");
+            expectedResultTable.Rows.Add("CME European Seasonal Strip HDD Index Futures AMSTERDAM DEC", "D2Z", "20", "Euro * respective CME European Seasonal Strip HDD Index", "", "25", "", "", "", "");
+
+            Assert.IsTrue(DataHelper.Equals(resultTable, expectedResultTable));
         }
     }
 }

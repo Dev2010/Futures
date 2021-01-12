@@ -46,15 +46,23 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\Application\CMEGroupPositionLimitFileParser\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Solution\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DictionaryEqualityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExcelHelperTest.cs" />
+    <Compile Include="DataHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\cme-dataset.xlsx" />
+    <None Include="data\cme_dataset_schema_test.json" />
     <None Include="data\position-limits-cme-empty-cols.xlsx" />
     <None Include="data\position-limits-cme.xlsx" />
     <None Include="packages.config" />

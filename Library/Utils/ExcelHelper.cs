@@ -60,9 +60,11 @@ namespace Utils
             }
         }
 
-        public static void GetDataSetFromExcelSheet(string fileName, int index, string headerMarker, string footerMarker, Dictionary<string, string> columnSchema)
+        public static DataTable GetDataSetFromExcelSheet(string fileName, int index, string headerMarker, string footerMarker, Dictionary<string, string> columnSchema)
         {
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), index));
+
+            DataTable dataTable = new DataTable();
 
             Excel.Application excel = new Excel.Application();
             excel.DisplayAlerts = false;
@@ -72,8 +74,6 @@ namespace Utils
                 excel.DisplayAlerts = false;
                 Excel.Workbook xlBook = excel.Workbooks.Open(fileName);
                 Excel.Worksheet xlSheet = (Excel.Worksheet)xlBook.Worksheets[index];
-
-                DataTable dataTable = new DataTable();
 
                 // Get range of the worksheet
                 Range usedRange = xlSheet.UsedRange;
@@ -151,9 +151,10 @@ namespace Utils
             }
             finally
             {
-                
                 excel.Quit();
             }
+
+            return dataTable;
         }
 
         private static DataTable GetDataTableSchema(string[] columns)
@@ -198,10 +199,6 @@ namespace Utils
             int headerColumnCount = 0;
             startOfDataIndex = 0;
             Dictionary<int, string> dtColumns = new Dictionary<int, string>();
-            //var Column = new DataColumn();
-            //Column.DataType = System.Type.GetType("System.String");
-            //Column.ColumnName = count.ToString();
-            //dataTable.Columns.Add(Column);
 
             // get the headers and column count
             for (int rowCount = 1; rowCount <= usedRange.Rows.Count; rowCount++)
@@ -247,41 +244,9 @@ namespace Utils
                         Logger.Info("Skipping.. header row not found");
                         continue;
                     }
-
-                    //if (cellValue.StartsWith(footerMarker, true, CultureInfo.InvariantCulture))
-                    //{
-                    //    Logger.Info(cellValue);
-                    //    Logger.Info("footer row found, stopping read");
-                    //    footerFound = true;
-                    //    break;
-                    //}
-
-                    //DataRow Row;
-
-                    //// Add to the DataTable
-                    //if (columnCount == 1)
-                    //{
-
-                    //    Row = dataTable.NewRow();
-                    //    Row[columnCount.ToString()] = cellValue;
-                    //    dataTable.Rows.Add(Row);
-                    //}
-                    //else
-                    //{
-
-                    //    Row = dataTable.Rows[rowCount + 1];
-                    //    Row[columnCount.ToString()] = cellValue;
-
-                    //}
                 }
             }
-
-            // columns
-            //foreach (KeyValuePair<int, string> keyValuePair in dtColumns)
-            //{
-            //    Logger.Info($"{keyValuePair.Key} - {keyValuePair.Value}");
-            //}
-
+            
             return dtColumns;
         }
     }

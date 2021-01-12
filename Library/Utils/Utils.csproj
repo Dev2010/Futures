@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnMismatchException.cs" />
+    <Compile Include="DataHelper.cs" />
     <Compile Include="DictionaryEquality.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="GeneralHelper.cs" />

@@ -1,0 +1,13 @@
+{
+  "Contract Name": "contract_name",
+  "Commodity Code": "commodity_code",
+  "Contract Size": "contract_size",
+  "Contract Units": "contract_units",
+  "Diminishing Balance Contract": "diminishing_balance_contract",
+  "Reporting Level": "reporting_level",
+  "Spot Month Position Comprised of Futures and Deliveries": "spot_month_position_comprised_of_futures_and_deliveries",
+  "Initial Spot-Month Limit (In Net Futures Equivalents) Leg (1)/ Leg (2)": "initial_spot_month_limit_in_net_futures_equivalents_leg_1_over_leg_2",
+  "Initial Spot-Month Limit Effective Date": "initial_spot_month_limit_effective_date",
+  "Subsequent Spot-Month Limit(s) Effective Date(s)": "subsequent_spot_month_limits_effective_dates",
+  "All Month Limit (In Net Futures Equivalents) Leg (1) / Leg (2)": "all_month_limit_in_net_futures_equivalents_leg_1_over_leg_2"
+}
