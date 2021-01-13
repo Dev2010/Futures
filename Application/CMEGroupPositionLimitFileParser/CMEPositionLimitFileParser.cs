@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Utils;
@@ -12,6 +15,7 @@ namespace CMEGroupPositionLimitFileParser
 {
     public class CMEPositionLimitFileParser
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public string Folder { get; }
         public string FileName { get; }
         public string FullyQualifiedFileName { get; }
@@ -29,20 +33,17 @@ namespace CMEGroupPositionLimitFileParser
             var text = File.ReadAllText(Config.Default.CMEHeaderMapFile);
             CMEHeaderValueToColumns = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
         }
-        public DataSet Read()
+        public DataTable Read()
         {
             Init();
 
-            DataSet ds = null;
 
             if (! File.Exists(FullyQualifiedFileName))
             {
                 throw new FileNotFoundException();
             }
 
-            ExcelHelper.GetDataSetFromExcelSheet(FullyQualifiedFileName, 1, Config.Default.CMEPositionLimitFileHeaderMarker, Config.Default.CMEPositionLimitFileFooterMarker, CMEHeaderValueToColumns);
-
-            return null;
+            return ExcelHelper.GetDataSetFromExcelSheet(FullyQualifiedFileName, 1, Config.Default.CMEPositionLimitFileHeaderMarker, Config.Default.CMEPositionLimitFileFooterMarker, CMEHeaderValueToColumns);
         }
     }
 }

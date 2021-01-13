@@ -68,5 +68,17 @@ namespace CMEGroupPositionLimitFileParser {
                 return ((string)(this["CMEHeaderMapFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=tcp:exchangelimit.database.windows.net,1433;Initial Catalog=exchangedata;P" +
+            "ersist Security Info=False;User ID=aRYlAdhoPtionONE;Password={your_password};Mul" +
+            "tipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection" +
+            " Timeout=30;")]
+        public string ExchangeDatabaseConnectionString {
+            get {
+                return ((string)(this["ExchangeDatabaseConnectionString"]));
+            }
+        }
     }
 }
