@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[cme_future_limit] (
+﻿CREATE TABLE [exch].[cme_future_limit] (
     [id]                                                                   BIGINT        IDENTITY (1, 1) NOT NULL,
     [run_id]                                                               BIGINT        NOT NULL,
     [create_date]                                                          DATETIME      NOT NULL,
