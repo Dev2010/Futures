@@ -85,5 +85,32 @@ namespace CMEGroupPositionLimitFileParser {
                 return ((string)(this["DBUser"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("save_cme_future_position_limit")]
+        public string spNameSaveCMEFuturePositionLimit {
+            get {
+                return ((string)(this["spNameSaveCMEFuturePositionLimit"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@cme_future_positionlimit")]
+        public string spNameSaveCMEFuturePositionLimitParamName {
+            get {
+                return ((string)(this["spNameSaveCMEFuturePositionLimitParamName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("exch.cme_future_position_limit_table_type")]
+        public string spNameSaveCMEFuturePositionLimitParamTypeName {
+            get {
+                return ((string)(this["spNameSaveCMEFuturePositionLimitParamTypeName"]));
+            }
+        }
     }
 }

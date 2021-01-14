@@ -25,6 +25,12 @@ namespace CMEGroupPositionLimitFileParser
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod()));
 
             PositionLimitFileParser positionLimitFileParser = new PositionLimitFileParser();
+            positionLimitFileParser.Process();
+        }
+
+        public void Process()
+        {
+            PositionLimitFileParser positionLimitFileParser = new PositionLimitFileParser();
 
             try
             {
@@ -36,14 +42,30 @@ namespace CMEGroupPositionLimitFileParser
                     {
                         CMEPositionLimitFileParser cmePositionLimitFileParser = new CMEPositionLimitFileParser(Config.Default.SourceFolder, fileName);
                         DataTable dtCME = cmePositionLimitFileParser.Read();
-                        System.Data.DataColumn newColumn = new System.Data.DataColumn("run_id", typeof(long));
-                        newColumn.DefaultValue = DateTime.Now.Ticks;
-                        dtCME.Columns.Add(newColumn);
-                        using (var conn = new SqlConnection(Config.Default.ExchangeDatabaseConnectionString))
-                        {
-                            conn.Open();
 
-                        }
+                        // add run_id
+                        System.Data.DataColumn run_id = new System.Data.DataColumn("run_id", typeof(long));
+                        run_id.DefaultValue = DateTime.Now.Ticks;
+                        dtCME.Columns.Add(run_id);
+                        // add create_date
+                        System.Data.DataColumn create_date = new System.Data.DataColumn("create_date", typeof(DateTime));
+                        create_date.DefaultValue = DateTime.Now;
+                        dtCME.Columns.Add(create_date);
+                        //create_user
+                        System.Data.DataColumn create_user = new System.Data.DataColumn("create_user", typeof(string));
+                        create_user.DefaultValue = Config.Default.DBUser;
+                        dtCME.Columns.Add(create_user);
+                        //last_update_date,
+                        System.Data.DataColumn last_update_date = new System.Data.DataColumn("last_update_date", typeof(DateTime));
+                        last_update_date.DefaultValue = DateTime.Now;
+                        dtCME.Columns.Add(last_update_date);
+                        //last_update_user,
+                        System.Data.DataColumn last_update_user = new System.Data.DataColumn("last_update_user", typeof(string));
+                        last_update_user.DefaultValue = Config.Default.DBUser;
+                        dtCME.Columns.Add(last_update_user);
+
+                        SqlHelper sqlHelper = new SqlHelper(Config.Default.ExchangeDatabaseConnectionString);
+                        sqlHelper.Save(Config.Default.spNameSaveCMEFuturePositionLimit, dtCME, Config.Default.spNameSaveCMEFuturePositionLimitParamName, Config.Default.spNameSaveCMEFuturePositionLimitParamTypeName);
                     }
                 }
             }
@@ -52,7 +74,6 @@ namespace CMEGroupPositionLimitFileParser
                 Logger.Error(exception);
             }
         }
-
         public IEnumerable<string> SearchFiles(string folder, string filePattern)
         {
             Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), folder, filePattern));

@@ -23,5 +23,14 @@
     <Setting Name="DBUser" Type="System.String" Scope="Application">
       <Value Profile="(Default)">position_limit_downloader</Value>
     </Setting>
+    <Setting Name="spNameSaveCMEFuturePositionLimit" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">save_cme_future_position_limit</Value>
+    </Setting>
+    <Setting Name="spNameSaveCMEFuturePositionLimitParamName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@cme_future_positionlimit</Value>
+    </Setting>
+    <Setting Name="spNameSaveCMEFuturePositionLimitParamTypeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">exch.cme_future_position_limit_table_type</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
