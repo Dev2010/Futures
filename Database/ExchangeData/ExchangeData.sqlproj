@@ -132,4 +132,7 @@
     </Build>
     <Build Include="Security\exch.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="compare\exchange_data_compare.scmp" />
+  </ItemGroup>
 </Project>
