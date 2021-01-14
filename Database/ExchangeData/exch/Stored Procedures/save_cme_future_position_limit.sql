@@ -12,6 +12,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     INSERT INTO exch.cme_future_position_limit(
+		run_id,
 		create_date,
 		create_user,
 		last_update_date,
@@ -52,6 +53,7 @@ BEGIN
 		all_month_limit_in_net_futures_equivalents_leg_1_over_leg_2
 	)
 	SELECT 
+		run_id,
 		create_date,
 		create_user,
 		last_update_date,
