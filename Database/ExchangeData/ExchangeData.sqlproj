@@ -125,14 +125,19 @@
     <Folder Include="exch\Tables\" />
     <Folder Include="Security\" />
     <Folder Include="exch\User Defined Types\" />
+    <Folder Include="exch\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="exch\Tables\cme_future_limit.sql">
+    <Build Include="Security\exch.sql" />
+    <Build Include="exch\Tables\cme_future_position_limit.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\exch.sql" />
-    <Build Include="exch\User Defined Types\cme_future_limit_table_type.sql" />
+    <Build Include="exch\Stored Procedures\save_cme_future_position_limit.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="exch\User Defined Types\cme_future_position_limit_table_type.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compare\exchange_data_compare.scmp" />

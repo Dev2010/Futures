@@ -36,10 +36,13 @@ namespace CMEGroupPositionLimitFileParser
                     {
                         CMEPositionLimitFileParser cmePositionLimitFileParser = new CMEPositionLimitFileParser(Config.Default.SourceFolder, fileName);
                         DataTable dtCME = cmePositionLimitFileParser.Read();
-                        long runId = DateTime.Now.Ticks;
+                        System.Data.DataColumn newColumn = new System.Data.DataColumn("run_id", typeof(long));
+                        newColumn.DefaultValue = DateTime.Now.Ticks;
+                        dtCME.Columns.Add(newColumn);
                         using (var conn = new SqlConnection(Config.Default.ExchangeDatabaseConnectionString))
                         {
                             conn.Open();
+
                         }
                     }
                 }

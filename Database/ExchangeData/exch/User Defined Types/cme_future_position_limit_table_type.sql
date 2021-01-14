@@ -1,5 +1,9 @@
-﻿CREATE TYPE [exch].[cme_future_limit_table_type] AS TABLE (
+﻿CREATE TYPE [exch].[cme_future_position_limit_table_type] AS TABLE (
     [run_id]                                                               BIGINT        NOT NULL,
+    [create_date]                                                          DATETIME      NOT NULL,
+    [create_user]                                                          VARCHAR (50)  NOT NULL,
+    [last_update_date]                                                     DATETIME      NOT NULL,
+    [last_update_user]                                                     VARCHAR (50)  NOT NULL,
     [contract_name]                                                        VARCHAR (255) NOT NULL,
     [rule_chapter]                                                         VARCHAR (255) NULL,
     [commodity_code]                                                       VARCHAR (255) NULL,

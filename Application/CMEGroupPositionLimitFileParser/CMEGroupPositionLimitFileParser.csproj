@@ -66,7 +66,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Config.Designer.cs</LastGenOutput>
     </None>
-    <None Include="data\cme_position_limit_header.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

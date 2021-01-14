@@ -61,8 +61,7 @@ namespace CMEGroupPositionLimitFileParser {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GitHub\\Futures\\Application\\CMEGroupPositionLimitFileParser\\data\\cme_position_l" +
-            "imit_header.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GitHub\\Futures\\Library\\CustomType\\json\\cme_position_limit_header.json")]
         public string CMEHeaderMapFile {
             get {
                 return ((string)(this["CMEHeaderMapFile"]));
@@ -75,6 +74,15 @@ namespace CMEGroupPositionLimitFileParser {
         public string ExchangeDatabaseConnectionString {
             get {
                 return ((string)(this["ExchangeDatabaseConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("position_limit_downloader")]
+        public string DBUser {
+            get {
+                return ((string)(this["DBUser"]));
             }
         }
     }
