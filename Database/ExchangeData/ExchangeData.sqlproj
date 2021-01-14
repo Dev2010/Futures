@@ -124,6 +124,7 @@
     <Folder Include="exch\" />
     <Folder Include="exch\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="exch\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="exch\Tables\cme_future_limit.sql">
@@ -131,6 +132,7 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Security\exch.sql" />
+    <Build Include="exch\User Defined Types\cme_future_limit_table_type.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compare\exchange_data_compare.scmp" />

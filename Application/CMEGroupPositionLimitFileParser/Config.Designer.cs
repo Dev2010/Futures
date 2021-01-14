@@ -12,7 +12,7 @@ namespace CMEGroupPositionLimitFileParser {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Config : global::System.Configuration.ApplicationSettingsBase {
         
         private static Config defaultInstance = ((Config)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Config())));
@@ -71,10 +71,7 @@ namespace CMEGroupPositionLimitFileParser {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=tcp:exchangelimit.database.windows.net,1433;Initial Catalog=exchangedata;P" +
-            "ersist Security Info=False;User ID=aRYlAdhoPtionONE;Password={your_password};Mul" +
-            "tipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection" +
-            " Timeout=30;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Server=tcp:exchangedata.database.windows.net,1433;Initial Catalog=exchangedata;Persist Security Info=False;User ID=aRYlAdhoPtionONE;Password=rkStInci1LDERpt@uRlASteRVERThGaelp;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")]
         public string ExchangeDatabaseConnectionString {
             get {
                 return ((string)(this["ExchangeDatabaseConnectionString"]));

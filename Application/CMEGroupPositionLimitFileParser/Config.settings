@@ -18,7 +18,7 @@
       <Value Profile="(Default)">C:\GitHub\Futures\Application\CMEGroupPositionLimitFileParser\data\cme_position_limit_header.json</Value>
     </Setting>
     <Setting Name="ExchangeDatabaseConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Server=tcp:exchangelimit.database.windows.net,1433;Initial Catalog=exchangedata;Persist Security Info=False;User ID=aRYlAdhoPtionONE;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
+      <Value Profile="(Default)">Server=tcp:exchangedata.database.windows.net,1433;Initial Catalog=exchangedata;Persist Security Info=False;User ID=aRYlAdhoPtionONE;Password=rkStInci1LDERpt@uRlASteRVERThGaelp;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

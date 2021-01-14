@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -34,7 +35,12 @@ namespace CMEGroupPositionLimitFileParser
                     if (fileName.StartsWith(Config.Default.CMEPositionLimitFilePattern, true, CultureInfo.InvariantCulture))
                     {
                         CMEPositionLimitFileParser cmePositionLimitFileParser = new CMEPositionLimitFileParser(Config.Default.SourceFolder, fileName);
-                        DataSet dsCME = cmePositionLimitFileParser.Read();
+                        DataTable dtCME = cmePositionLimitFileParser.Read();
+                        long runId = DateTime.Now.Ticks;
+                        using (var conn = new SqlConnection(Config.Default.ExchangeDatabaseConnectionString))
+                        {
+                            conn.Open();
+                        }
                     }
                 }
             }

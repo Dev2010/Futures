@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.161
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ExchangeData", "ExchangeData.sqlproj", "{AD557419-C7C7-4AE9-A094-1662BC09E506}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ExchangeData", "..\Database\ExchangeData\ExchangeData.sqlproj", "{AD557419-C7C7-4AE9-A094-1662BC09E506}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
