@@ -142,12 +142,12 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="exch\User Defined Types\cme_future_position_limit_table_type.sql" />
-    <Build Include="util\Stored Procedures\GetNextCountBy1.sql">
+    <Build Include="Security\util.sql" />
+    <Build Include="util\Stored Procedures\sp_get_increment_by_1.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\util.sql" />
-    <Build Include="util\Sequences\CountBy1.sql" />
+    <Build Include="util\Sequences\seq_increment_by_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compare\exchange_data_compare.scmp" />

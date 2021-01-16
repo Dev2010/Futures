@@ -112,5 +112,14 @@ namespace CMEGroupPositionLimitFileParser {
                 return ((string)(this["spNameSaveCMEFuturePositionLimitParamTypeName"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("util.sp_get_increment_by_1")]
+        public string spNameGetNextSequenceIncrementBy1 {
+            get {
+                return ((string)(this["spNameGetNextSequenceIncrementBy1"]));
+            }
+        }
     }
 }

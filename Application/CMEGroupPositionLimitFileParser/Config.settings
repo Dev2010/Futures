@@ -32,5 +32,8 @@
     <Setting Name="spNameSaveCMEFuturePositionLimitParamTypeName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">exch.cme_future_position_limit_table_type</Value>
     </Setting>
+    <Setting Name="spNameGetNextSequenceIncrementBy1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">util.sp_get_increment_by_1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

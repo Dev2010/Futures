@@ -21,7 +21,6 @@ namespace Utils
         {
             ConnectionString = connectionString;
         }
-
         public void Save(string spName, DataTable dataTable, string parameterName, string parameterTypeName)
         {
             Logger.Debug(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), spName, parameterName, parameterTypeName));
@@ -113,6 +112,27 @@ namespace Utils
             {
                 Logger.Error(exception);
             }
+        }
+
+        public long GetSequenceNextVal(string spName)
+        {
+            Logger.Info(LogHelper.LogInfo(MethodBase.GetCurrentMethod(), spName));
+
+            long nextSeq;
+            DataTable dataTable = new DataTable();
+
+            using (var sqlConnection = new SqlConnection(ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                    sqlDataAdapter.Fill(dataTable);
+                }
+            }
+            nextSeq = Convert.ToInt64(dataTable.Rows[0][0]);
+            return nextSeq;
         }
     }
 }

@@ -35,6 +35,7 @@ namespace CMEGroupPositionLimitFileParser
             try
             {
                 IEnumerable<string> files = positionLimitFileParser.SearchFiles(Config.Default.SourceFolder, string.Empty);
+                SqlHelper sqlHelper = new SqlHelper(Config.Default.ExchangeDatabaseConnectionString);
                 //ExcelHelper.ConvertExcelSheetToCsv(Config.Default.SourceFolder, files);
                 foreach (string fileName in files)
                 {
@@ -45,7 +46,7 @@ namespace CMEGroupPositionLimitFileParser
 
                         // add run_id
                         System.Data.DataColumn run_id = new System.Data.DataColumn("run_id", typeof(long));
-                        run_id.DefaultValue = DateTime.Now.Ticks;
+                        run_id.DefaultValue = sqlHelper.GetSequenceNextVal(Config.Default.spNameGetNextSequenceIncrementBy1);
                         dtCME.Columns.Add(run_id);
                         // add create_date
                         System.Data.DataColumn create_date = new System.Data.DataColumn("create_date", typeof(DateTime));
@@ -63,8 +64,7 @@ namespace CMEGroupPositionLimitFileParser
                         System.Data.DataColumn last_update_user = new System.Data.DataColumn("last_update_user", typeof(string));
                         last_update_user.DefaultValue = Config.Default.DBUser;
                         dtCME.Columns.Add(last_update_user);
-
-                        SqlHelper sqlHelper = new SqlHelper(Config.Default.ExchangeDatabaseConnectionString);
+                        
                         sqlHelper.Save(Config.Default.spNameSaveCMEFuturePositionLimit, dtCME);
                     }
                 }
