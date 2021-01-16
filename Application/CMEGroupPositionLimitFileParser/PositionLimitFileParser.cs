@@ -65,7 +65,7 @@ namespace CMEGroupPositionLimitFileParser
                         dtCME.Columns.Add(last_update_user);
 
                         SqlHelper sqlHelper = new SqlHelper(Config.Default.ExchangeDatabaseConnectionString);
-                        sqlHelper.Save(Config.Default.spNameSaveCMEFuturePositionLimit, dtCME, Config.Default.spNameSaveCMEFuturePositionLimitParamName, Config.Default.spNameSaveCMEFuturePositionLimitParamTypeName);
+                        sqlHelper.Save(Config.Default.spNameSaveCMEFuturePositionLimit, dtCME);
                     }
                 }
             }

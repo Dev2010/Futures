@@ -88,7 +88,7 @@ namespace CMEGroupPositionLimitFileParser {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("save_cme_future_position_limit")]
+        [global::System.Configuration.DefaultSettingValueAttribute("exch.save_cme_future_position_limit")]
         public string spNameSaveCMEFuturePositionLimit {
             get {
                 return ((string)(this["spNameSaveCMEFuturePositionLimit"]));

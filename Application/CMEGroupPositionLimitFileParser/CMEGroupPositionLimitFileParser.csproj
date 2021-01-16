@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CMEFuturePositionLimitDB.cs" />
     <Compile Include="CMEPositionLimitFileParser.cs" />
     <Compile Include="Config.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -48,12 +48,14 @@
   <ItemGroup>
     <Compile Include="ColumnMismatchException.cs" />
     <Compile Include="DataHelper.cs" />
+    <Compile Include="DataTypeNotSupported.cs" />
     <Compile Include="DictionaryEquality.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="GeneralHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />
+    <Compile Include="SqlParameterUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
