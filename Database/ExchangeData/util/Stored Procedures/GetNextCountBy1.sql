@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE util.GetNextCountBy1
+AS 
+BEGIN
+    SELECT NEXT VALUE FOR util.CountBy1;
+END

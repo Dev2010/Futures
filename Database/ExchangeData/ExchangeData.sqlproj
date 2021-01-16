@@ -126,6 +126,10 @@
     <Folder Include="Security\" />
     <Folder Include="exch\User Defined Types\" />
     <Folder Include="exch\Stored Procedures\" />
+    <Folder Include="dbo\Sequences\" />
+    <Folder Include="util\" />
+    <Folder Include="util\Stored Procedures\" />
+    <Folder Include="util\Sequences\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Security\exch.sql" />
@@ -138,6 +142,12 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="exch\User Defined Types\cme_future_position_limit_table_type.sql" />
+    <Build Include="util\Stored Procedures\GetNextCountBy1.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Security\util.sql" />
+    <Build Include="util\Sequences\CountBy1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compare\exchange_data_compare.scmp" />

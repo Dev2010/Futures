@@ -302,11 +302,11 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetDatabaseName</Name>
-        <Value>exchangedata</Value>
+        <Value>ExchangeData</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Data Source=exchangedata.database.windows.net;Initial Catalog=exchangedata;Persist Security Info=True;User ID=aRYlAdhoPtionONE;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;Application Name="Microsoft SQL Server Data Tools, Schema Compare"</Value>
+        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>
