@@ -60,12 +60,14 @@ namespace Utils
             {
                 using (var sqlConnection = new SqlConnection(ConnectionString))
                 {
+                    sqlConnection.Open();
                     using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
 
                         foreach (DataRow dataRow in dataTable.Rows)
                         {
+                            sqlCommand.Parameters.Clear();
                             foreach (DataColumn dataColumn in dataTable.Columns)
                             {
                                 object fieldValue = dataRow[dataColumn];
@@ -100,12 +102,11 @@ namespace Utils
                                     throw new DataTypeNotSupported();
                                 }
                             }
+                            
+                            sqlCommand.ExecuteNonQuery();
                         }
-
-                        sqlConnection.Open();
-                        sqlCommand.ExecuteNonQuery();
-                        sqlConnection.Close();
                     }
+                    sqlConnection.Close();
                 }
             }
             catch (Exception exception)
